@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Persistences.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace Persistences.Entities;
@@ -11,7 +12,7 @@ public partial class SystemAccount
 
     public string? AccountEmail { get; set; }
 
-    public int? AccountRole { get; set; }
+    public UserRole? AccountRole { get; set; }
 
     public string? AccountPassword { get; set; }
 

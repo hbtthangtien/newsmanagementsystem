@@ -117,7 +117,17 @@ public partial class FunewsManagementContext : DbContext
             entity.Property(e => e.Note).HasMaxLength(400);
             entity.Property(e => e.TagName).HasMaxLength(50);
         });
-
+        modelBuilder.Entity<SystemAccount>(entity =>
+        {
+            entity.HasData(new SystemAccount
+            {
+                AccountEmail = "ductung1706@gmail.com",
+                AccountPassword = "Ductung1706@",
+                AccountName = "Bui Duc Tung",
+                AccountId = 1,
+                AccountRole = Enum.UserRole.Staff
+            });
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using UI.Filter;
 using UI.Models;
 
 namespace UI.Controllers
@@ -17,7 +18,7 @@ namespace UI.Controllers
         {
             return View();
         }
-
+        [CustomAuthorize]
         public IActionResult Privacy()
         {
             return View();
