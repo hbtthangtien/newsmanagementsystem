@@ -10,5 +10,8 @@ namespace Persistences.Repository
 {
     public class TagRepository : GenericRepository<Tag>, ITagRepository
     {
+        public TagRepository(FunewsManagementContext funewsManagementContext) : base(funewsManagementContext)
+        {
+        }
     }
 }

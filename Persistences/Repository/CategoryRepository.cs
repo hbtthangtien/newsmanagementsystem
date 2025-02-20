@@ -10,5 +10,9 @@ namespace Persistences.Repository
 {
     public class CategoryRepository : GenericRepository<Category>, ICategoryrepository
     {
+        public CategoryRepository(FunewsManagementContext funewsManagementContext) 
+            : base(funewsManagementContext)
+        {
+        }
     }
 }

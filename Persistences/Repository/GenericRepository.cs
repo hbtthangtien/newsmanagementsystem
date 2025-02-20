@@ -1,7 +1,10 @@
-﻿using Persistences.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using Persistences.Entities;
+using Persistences.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,24 +12,41 @@ namespace Persistences.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T>  where T : class
     {
-        public Task AddAsync(T entity)
+        private readonly FunewsManagementContext _context;
+        private DbSet<T> _dbSet;
+        protected GenericRepository(FunewsManagementContext funewsManagementContext)
         {
-            throw new NotImplementedException();
+            if(_context == null)
+            {
+                _context = funewsManagementContext;               
+            }
+            _dbSet = _context.Set<T>();
+        }
+        public async Task AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
         }
 
-        public Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbSet.ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetBySingleAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+
+            return await _dbSet.Where<T>(predicate).SingleOrDefaultAsync();
+        }
+
+        public async Task SaveChangeAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Update(entity);
         }
+
     }
 }

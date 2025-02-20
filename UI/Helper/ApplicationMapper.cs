@@ -9,6 +9,7 @@ namespace UI.Helper
         public ApplicationMapper()
         {
             CreateMap<LoginModel, SystemAccount>().ReverseMap();
+            CreateMap<NewsArticleViewModel, NewsArticle>().ReverseMap();
         }
     }
 }

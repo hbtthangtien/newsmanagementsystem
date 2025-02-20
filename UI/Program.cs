@@ -1,4 +1,5 @@
 using Application;
+using Microsoft.AspNetCore.Builder;
 using Persistences;
 using Persistences.DatabaseConfig;
 using UI.Helper;
@@ -32,10 +33,13 @@ namespace UI
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapControllerRoute(
+                    name:"staff",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=NewsArticle}/{action=Index}/{id?}");
 
             app.Run();
         }

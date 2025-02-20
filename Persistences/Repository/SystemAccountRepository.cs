@@ -10,6 +10,10 @@ namespace Persistences.Repository
 {
     public class SystemAccountRepository : GenericRepository<SystemAccount>, ISystemAccount
     {
+        public SystemAccountRepository(FunewsManagementContext funewsManagementContext) : base(funewsManagementContext)
+        {
+        }
+
         public SystemAccount Login(SystemAccount account)
         {
             throw new NotImplementedException();

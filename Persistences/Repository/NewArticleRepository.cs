@@ -10,5 +10,8 @@ namespace Persistences.Repository
 {
     public class NewArticleRepository : GenericRepository<NewsArticle>, INewArticleRepository
     {
+        public NewArticleRepository(FunewsManagementContext funewsManagementContext) : base(funewsManagementContext)
+        {
+        }
     }
 }

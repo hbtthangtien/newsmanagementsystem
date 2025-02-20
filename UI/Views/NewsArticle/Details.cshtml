@@ -1,0 +1,69 @@
+﻿@model UI.Models.NewsArticleViewModel
+<div class="container">
+    <div class="header">
+        <h1><strong>@Model.NewsTitle</strong></h1>
+        <div class="category">
+            <span>@Model.Category!.CategoryName</span>
+            @foreach(var i in Model.Tags)
+            {
+                <div class="tag">@i.TagName</div>
+            }
+        </div>
+    </div>
+    <h2>@Model.Headline</h2>
+    <p>
+        @Model.NewsContent
+    </p>
+    <footer>
+        <p>Date: @Model.CreatedDate</p>
+        <p>Author: @Model.CreatedBy!.AccountName</p>
+    </footer>
+</div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: white;
+        color: black;
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .category {
+        text-align: right;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 5px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+    }
+
+    h1,
+    h2 {
+        color: #333;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    footer {
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        margin-top: 20px;
+    }
+</style>

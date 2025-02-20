@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interface;
+﻿using Application.Interface;
 using Microsoft.AspNetCore.Http;
 using Persistences.Entities;
 using Persistences.Interface;

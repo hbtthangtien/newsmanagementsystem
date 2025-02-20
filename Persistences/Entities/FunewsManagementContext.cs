@@ -24,7 +24,10 @@ public partial class FunewsManagementContext : DbContext
     public virtual DbSet<Tag> Tags { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Mydatabase");
+    {
+        optionsBuilder.UseSqlServer("Name=ConnectionStrings:Mydatabase");
+        optionsBuilder.UseLazyLoadingProxies();
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -128,6 +131,7 @@ public partial class FunewsManagementContext : DbContext
                 AccountRole = Enum.UserRole.Staff
             });
         });
+        
         OnModelCreatingPartial(modelBuilder);
     }
 
