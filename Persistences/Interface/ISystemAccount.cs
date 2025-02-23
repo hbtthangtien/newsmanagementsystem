@@ -9,6 +9,6 @@ namespace Persistences.Interface
 {
     public interface ISystemAccount : IGenericRepository<SystemAccount>
     {
-        
+        public Task<SystemAccount> LoginSystem(SystemAccount account);
     }
 }

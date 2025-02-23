@@ -26,7 +26,10 @@
                 <label class="form-check-label" for="form2Example31"> Remember me </label>
             </div>
         </div>
-
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <p style="color:red">@ViewData["ErrorMessage"]</p>
+        }
         <div class="col">
             <!-- Simple link -->
             <a href="#!">Forgot password?</a>

@@ -13,10 +13,22 @@ namespace UI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddControllers()
+                            .AddNewtonsoftJson(options =>
+                            {
+                                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                            });
             builder.Services.AddDbContext(builder.Configuration);
             builder.Services.AddPersistence();
             builder.Services.AddApplication();
             builder.Services.AddAutoMapper(typeof(ApplicationMapper));
+            builder.Services.AddDistributedMemoryCache(); 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); 
+                options.Cookie.HttpOnly = true; 
+                options.Cookie.IsEssential = true; 
+            });
             var app = builder.Build();
             
             // Configure the HTTP request pipeline.
@@ -31,7 +43,8 @@ namespace UI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllerRoute(
                     name:"staff",
@@ -39,7 +52,7 @@ namespace UI
                 );
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=NewsArticle}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -10,6 +10,6 @@ namespace Application.Interface
 {
     public interface IAuthenticateService
     {
-        public Task<bool> LoginUser(SystemAccount dto);
+        public Task<SystemAccount> LoginUser(SystemAccount dto);
     }
 }

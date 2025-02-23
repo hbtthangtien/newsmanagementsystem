@@ -17,6 +17,7 @@ namespace Persistences.Interface
 
         public void Update(T entity);
 
+        public Task DeleteAsync(T entity);
         public Task SaveChangeAsync();
     }
 }

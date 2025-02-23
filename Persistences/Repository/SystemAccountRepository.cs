@@ -1,4 +1,5 @@
-﻿using Persistences.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Persistences.Entities;
 using Persistences.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,13 @@ namespace Persistences.Repository
         public SystemAccount Login(SystemAccount account)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<SystemAccount?> LoginSystem(SystemAccount account)
+        {
+            var user =await _context.SystemAccounts.SingleOrDefaultAsync(a => a.AccountEmail == account.AccountEmail
+                && a.AccountPassword == account.AccountPassword);
+            return user;
         }
     }
 }

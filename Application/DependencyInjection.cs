@@ -15,7 +15,7 @@ namespace Application
         {
             services.AddScoped<IAuthenticateService,AuthenticateService>();
             services.AddScoped<INewArticleService,NewArticleService>();
-
+            services.AddScoped<ICategoryServices,CategoryService>();
         }
     }
 }

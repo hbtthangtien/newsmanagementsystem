@@ -17,9 +17,11 @@ namespace Application.Services
         {
             _systemAccount = systemAccount;
         }
-        public Task<bool> LoginUser(SystemAccount dto)
+        public async Task<SystemAccount> LoginUser(SystemAccount dto)
         {
-            throw new NotImplementedException();
+            var users = await _systemAccount.LoginSystem(dto);
+            return users;
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Persistences.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T>  where T : class
     {
-        private readonly FunewsManagementContext _context;
+        protected readonly FunewsManagementContext _context;
         private DbSet<T> _dbSet;
         protected GenericRepository(FunewsManagementContext funewsManagementContext)
         {
@@ -25,6 +25,12 @@ namespace Persistences.Repository
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+        }
+
+        public Task DeleteAsync(T entity)
+        {
+            _dbSet.Remove(entity);
+            return Task.CompletedTask;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

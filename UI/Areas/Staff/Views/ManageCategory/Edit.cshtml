@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var categories = ViewBag.categories as List<CategoryModel>;
+}
+@model UI.Areas.Staff.Models.CategoryModel
+<div class="form-container">
+    <form action="edit?id=@Model.CategoryId" method="POST" >
+        <div class="form-group">
+            <label for="categoryName">@Model.CategoryName</label>
+            <input type="text" id="categoryName" asp-for="CategoryName" required>
+        </div>
+        <div class="form-group">
+            <label for="categoryDescription">Category Description</label>
+            <textarea id="categoryDescription" asp-for="CategoryDesciption" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="categoryParent">Category Parent</label>
+            <select id="categoryParent" asp-for="ParentCategoryId">
+                @foreach (var i in categories)
+                {
+                    <option value="@i.CategoryId">@i.CategoryName</option>
+                }
+            </select>
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+</div>
+<style>
+
+
+    .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        justify-content:center;
+    }
+
+    main.pb-3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+</style>

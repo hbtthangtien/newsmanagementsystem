@@ -5,11 +5,11 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    public class NewsArticleController : Controller
+    public class HomeController : Controller
     {
         private readonly INewArticleService _newArticleService;
         private readonly IMapper _mapper;
-        public NewsArticleController(INewArticleService newArticleService, IMapper mapper)
+        public HomeController(INewArticleService newArticleService, IMapper mapper)
         {
             _newArticleService = newArticleService;
             _mapper = mapper;
