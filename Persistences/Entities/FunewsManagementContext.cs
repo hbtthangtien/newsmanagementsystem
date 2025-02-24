@@ -50,7 +50,7 @@ public partial class FunewsManagementContext : DbContext
             entity.ToTable("NewsArticle");
 
             entity.Property(e => e.NewsArticleId)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .HasColumnName("NewsArticleID");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.CreatedById).HasColumnName("CreatedByID");
@@ -77,18 +77,18 @@ public partial class FunewsManagementContext : DbContext
                     "NewsTag",
                     r => r.HasOne<Tag>().WithMany()
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_NewsTag_Tag"),
                     l => l.HasOne<NewsArticle>().WithMany()
                         .HasForeignKey("NewsArticleId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_NewsTag_NewsArticle"),
                     j =>
                     {
                         j.HasKey("NewsArticleId", "TagId");
                         j.ToTable("NewsTag");
                         j.IndexerProperty<string>("NewsArticleId")
-                            .HasMaxLength(20)
+                            .HasMaxLength(100)
                             .HasColumnName("NewsArticleID");
                         j.IndexerProperty<int>("TagId").HasColumnName("TagID");
                     });

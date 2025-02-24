@@ -9,5 +9,6 @@ namespace Persistences.Interface
 {
     public interface INewArticleRepository : IGenericRepository<NewsArticle>
     {
+        public Task AddNewsArticle(NewsArticle newNewsArticle, string[] tagId);
     }
 }

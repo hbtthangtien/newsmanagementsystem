@@ -28,8 +28,8 @@ namespace Persistences.Migrations
             modelBuilder.Entity("NewsTag", b =>
                 {
                     b.Property<string>("NewsArticleId")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("NewsArticleID");
 
                     b.Property<int>("TagId")
@@ -79,8 +79,8 @@ namespace Persistences.Migrations
             modelBuilder.Entity("Persistences.Entities.NewsArticle", b =>
                 {
                     b.Property<string>("NewsArticleId")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("NewsArticleID");
 
                     b.Property<short?>("CategoryId")
@@ -194,12 +194,14 @@ namespace Persistences.Migrations
                     b.HasOne("Persistences.Entities.NewsArticle", null)
                         .WithMany()
                         .HasForeignKey("NewsArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_NewsTag_NewsArticle");
 
                     b.HasOne("Persistences.Entities.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_NewsTag_Tag");
                 });

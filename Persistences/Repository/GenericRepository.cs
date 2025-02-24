@@ -10,21 +10,18 @@ using System.Threading.Tasks;
 
 namespace Persistences.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T>  where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly FunewsManagementContext _context;
         private DbSet<T> _dbSet;
         protected GenericRepository(FunewsManagementContext funewsManagementContext)
         {
-            if(_context == null)
-            {
-                _context = funewsManagementContext;               
-            }
+            _context = funewsManagementContext;
             _dbSet = _context.Set<T>();
         }
         public async Task AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            var result = await _dbSet.AddAsync(entity);
         }
 
         public Task DeleteAsync(T entity)
@@ -46,7 +43,14 @@ namespace Persistences.Repository
 
         public async Task SaveChangeAsync()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.InnerException?.Message);
+            }
         }
 
         public void Update(T entity)

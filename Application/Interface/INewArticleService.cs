@@ -1,4 +1,5 @@
-﻿using Persistences.Entities;
+﻿using Application.DTOs;
+using Persistences.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,5 +14,9 @@ namespace Application.Interface
         public Task<IEnumerable> GetAllAsync();
 
         public Task<NewsArticle> GetByIdAsync(string id);
+
+        public Task DeleteAsync(string id);
+
+        public Task AddAsync(NewsArticleDTO article);
     }
 }

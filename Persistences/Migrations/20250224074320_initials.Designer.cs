@@ -12,8 +12,8 @@ using Persistences.Entities;
 namespace Persistences.Migrations
 {
     [DbContext(typeof(FunewsManagementContext))]
-    [Migration("20250222134121_update1")]
-    partial class update1
+    [Migration("20250224074320_initials")]
+    partial class initials
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,12 +197,14 @@ namespace Persistences.Migrations
                     b.HasOne("Persistences.Entities.NewsArticle", null)
                         .WithMany()
                         .HasForeignKey("NewsArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_NewsTag_NewsArticle");
 
                     b.HasOne("Persistences.Entities.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_NewsTag_Tag");
                 });

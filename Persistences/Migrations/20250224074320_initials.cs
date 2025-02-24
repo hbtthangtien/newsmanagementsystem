@@ -40,7 +40,8 @@ namespace Persistences.Migrations
                     AccountName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     AccountEmail = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
                     AccountRole = table.Column<int>(type: "int", nullable: true),
-                    AccountPassword = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true)
+                    AccountPassword = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: true),
+                    AccountStatus = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,18 +108,20 @@ namespace Persistences.Migrations
                         name: "FK_NewsTag_NewsArticle",
                         column: x => x.NewsArticleID,
                         principalTable: "NewsArticle",
-                        principalColumn: "NewsArticleID");
+                        principalColumn: "NewsArticleID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_NewsTag_Tag",
                         column: x => x.TagID,
                         principalTable: "Tag",
-                        principalColumn: "TagID");
+                        principalColumn: "TagID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "SystemAccount",
-                columns: new[] { "AccountID", "AccountEmail", "AccountName", "AccountPassword", "AccountRole" },
-                values: new object[] { (short)1, "ductung1706@gmail.com", "Bui Duc Tung", "Ductung1706@", 1 });
+                columns: new[] { "AccountID", "AccountEmail", "AccountName", "AccountPassword", "AccountRole", "AccountStatus" },
+                values: new object[] { (short)1, "ductung1706@gmail.com", "Bui Duc Tung", "Ductung1706@", 1, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_ParentCategoryID",

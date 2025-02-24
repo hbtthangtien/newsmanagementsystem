@@ -1,6 +1,109 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<UI.Areas.Staff.Models.NewsArticleModel>
 @{
 }
 <h1>Manage News Article</h1>
+<table>
+    <tr>
+        <th>News Title</th>
+        <th>Headline</th>
+        <th>News Content</th>
+        <th>News Source</th>
+        <th>Category</th>
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>Modified Date</th>
+        <th>Status</th>
+        <th>Action</th>
+
+    </tr>   
+    @foreach(var i in Model)
+    {
+        <tr>
+            <td>@i.NewsTitle</td>
+            <td>@i.Headline</td>
+            <td>@i.NewsContent</td>
+            <td>@i.NewsSource</td>
+            <td>@i.Category</td>
+            <td>@i.CreatedBy</td>
+            <td>@i.CreatedDate</td>
+            <td>@i.ModifiedDate</td>
+            <td>@i.NewsStatus</td>
+            <td>               
+                <button onclick="deleteNews(@i.NewsArticleId,'@i.NewsTitle')">Delete</button>
+                <button style="background:forestgreen" onclick="editNews(@i.NewsArticleId)">Edit</button>
+            </td>
+
+        </tr>
+    }
+</table>
+</table>
+<div><button type="button" onclick="addNews()">Add New News Article</button></div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+</style>
+<script>
+    function deleteNews(id, name) {
+        if (confirm('Are you sure you want to delete ' + name + '?')) {
+            $.ajax({
+                url: '@Url.Action("Delete", "ManageNewsArticle")', // action/controller
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        location.reload;
+                        alert(response.message);
+                        
+                        // Additional logic on success
+                    } else {
+                        alert('Error occurred.');
+                    }
+                },
+                error: function () {
+                    alert('Error contacting server.');
+                }
+            });
+        }
+    }
+
+    function editNews(id) {
+        window.location.href = 'ManageNewsArticle/edit?id='+id;
+    }
+    function addNews() {
+        window.location.href = 'ManageNewsArticle/add';
+    }
+</script>

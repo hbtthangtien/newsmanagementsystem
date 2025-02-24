@@ -9,7 +9,7 @@ namespace Persistences.Interface
 {
     public interface IGenericRepository<T> where T : class
     {
-        public Task<T> GetBySingleAsync(Expression<Func<T, bool>> predicate);
+        public Task<T?> GetBySingleAsync(Expression<Func<T, bool>> predicate);
 
         public Task<IEnumerable<T>> GetAllAsync();
 

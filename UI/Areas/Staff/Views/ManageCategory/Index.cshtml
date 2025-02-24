@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<UI.Areas.Staff.Models.CategoryModel>
+<h1>Manage Category</h1>
 <table>
     <tr>
         <th>Category name</th>
@@ -75,8 +76,8 @@
                 data: { id: id },
                 success: function (response) {
                     if (response.success) {
+                        location.reload();
                         alert(response.message);
-                        window.location.reload;
                         // Additional logic on success
                     } else {
                         alert('Error occurred.');
