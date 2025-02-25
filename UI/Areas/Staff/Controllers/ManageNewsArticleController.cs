@@ -4,10 +4,12 @@ using Application.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using UI.Areas.Staff.Models;
+using UI.Filter;
 
 namespace UI.Areas.Staff.Controllers
 {
     [Area("staff")]
+    [CustomAuthorize("staff")]
     public class ManageNewsArticleController : Controller
     {
         private readonly INewArticleService _newsArticleService;
@@ -44,14 +46,22 @@ namespace UI.Areas.Staff.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(NewsArticleModel model)
         {
-            model.CreatedBy = "1";
+            model.CreatedBy = HttpContext.Session.GetString("UserId");
             var data = _mapper.Map<NewsArticleDTO>(model);
             await _newsArticleService.AddAsync(data);
             return RedirectToAction("index", "ManageNewsArticle");
         }
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            return View(new NewsArticleModel());
+            var db2 = await _categoryService.GetAllCategoryAsync();
+            var dataTag = await _tagService.GetAllTags();
+            var categories = _mapper.Map<List<CategoryModel>>(db2);
+            var tags = _mapper.Map<List<TagModel>>(dataTag);
+            ViewBag.Categories = categories;
+            ViewBag.Tags = tags;
+            var db = await _newsArticleService.GetByIdAsync(id);
+            var model = _mapper.Map<NewsArticleModel>(db);
+            return View(model);
         }
 
         [HttpPost]
@@ -63,6 +73,24 @@ namespace UI.Areas.Staff.Controllers
                 Message = "Delete successfully",
                 success = true
             });
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(bool NewsStatus, NewsArticleModel model, string id)
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            model.UpdatedBy = userId;
+            model.NewsStatus = NewsStatus;
+            model.NewsArticleId = id;
+            var data = _mapper.Map<NewsArticleDTO>(model);
+            await _newsArticleService.UpdateAsync(data);
+            return RedirectToAction("index");
+        }
+        public async Task<IActionResult> History()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            var data = await _newsArticleService.GetAllByCreatedById(userId!);
+            var news = _mapper.Map<List<NewsArticleModel>>(data);
+            return View(news);
         }
     }
 }

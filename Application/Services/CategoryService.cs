@@ -47,6 +47,7 @@ namespace Application.Services
             update.CategoryDesciption = category.CategoryDesciption;
             update.CategoryName = category.CategoryName;
             update.ParentCategoryId = category.ParentCategoryId;
+            update.IsActive = category.IsActive;
             _categoryRepository.Update(update);
             await _categoryRepository.SaveChangeAsync();
             await Task.CompletedTask;

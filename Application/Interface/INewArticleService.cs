@@ -18,5 +18,9 @@ namespace Application.Interface
         public Task DeleteAsync(string id);
 
         public Task AddAsync(NewsArticleDTO article);
+
+        public Task UpdateAsync(NewsArticleDTO article);
+
+        public Task<IEnumerable> GetAllByCreatedById(string id);
     }
 }

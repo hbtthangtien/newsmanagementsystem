@@ -22,7 +22,8 @@ namespace UI
             builder.Services.AddPersistence();
             builder.Services.AddApplication();
             builder.Services.AddAutoMapper(typeof(ApplicationMapper));
-            builder.Services.AddDistributedMemoryCache(); 
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30); 

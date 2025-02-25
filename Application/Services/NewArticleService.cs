@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interface;
+using Microsoft.EntityFrameworkCore;
 using Persistences.Entities;
 using Persistences.Interface;
 using System;
@@ -25,7 +26,7 @@ namespace Application.Services
         {
 
             string[] tagId = dto.Tags!.Split(";");
-            
+
             var article = new NewsArticle
             {
                 CategoryId = short.Parse(dto.Category!),
@@ -53,9 +54,30 @@ namespace Application.Services
             return await _newArticleRepository.GetAllAsync();
         }
 
-        public async Task<NewsArticle> GetByIdAsync(string id)
+        public async Task<IEnumerable> GetAllByCreatedById(string id)
+        {
+            var data = await _newArticleRepository.GetAllByCreatedId(id);
+            return data;
+        }
+
+        public async Task<NewsArticle?> GetByIdAsync(string id)
         {
             return await _newArticleRepository.GetBySingleAsync(u => u.NewsArticleId == id);
+        }
+
+        public async Task UpdateAsync(NewsArticleDTO dto)
+        {
+            string[] tagId = dto.Tags!.Split(";");
+            var news =await _newArticleRepository.GetBySingleAsync(e => e.NewsArticleId == dto.NewsArticleId);
+            news!.NewsStatus = dto.NewsStatus;
+            news!.NewsTitle = dto.NewsTitle;
+            news.NewsContent = dto.NewsContent;
+            news.NewsSource = dto.NewsSource;
+            news.Headline = dto.Headline!;
+            news.UpdatedById = short.Parse(dto.UpdatedBy!);
+            news.CategoryId = short.Parse(dto.Category!);
+            news.ModifiedDate = DateTime.Now;
+            await _newArticleRepository.UpdateArticle(news,tagId);
         }
     }
 }

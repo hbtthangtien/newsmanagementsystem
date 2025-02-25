@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Security.Principal;
 using System.Text.Json;
-using System.Web;
 using UI.Models;
 namespace UI.Filter
 {

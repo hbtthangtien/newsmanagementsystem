@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UI.Areas.Staff.Models.AccountModel
+
+<div class="form-container">
+    <h1>Profile</h1>
+    <form action="Account/edit" method="POST">
+        <div class="form-group">
+            <label asp-for="AccountName">Account Name</label>
+            <input type="text" asp-for="AccountName" >
+        </div>
+        <div class="form-group">
+            <label asp-for="AccountEmail">Email</label>
+            <input type="text" value="@Model.AccountEmail" readonly >
+        </div>
+        <div class="form-group">
+            <label asp-for="AccountPassword">Password</label>
+            <input type="password" asp-for="AccountPassword" value="@Model.AccountPassword">
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+</div>

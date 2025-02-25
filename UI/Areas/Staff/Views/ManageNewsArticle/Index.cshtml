@@ -27,10 +27,10 @@
             <td>@i.CreatedBy</td>
             <td>@i.CreatedDate</td>
             <td>@i.ModifiedDate</td>
-            <td>@i.NewsStatus</td>
+            <td>@(i.NewsStatus==true?"Active":"Inactive")</td>
             <td>               
-                <button onclick="deleteNews(@i.NewsArticleId,'@i.NewsTitle')">Delete</button>
-                <button style="background:forestgreen" onclick="editNews(@i.NewsArticleId)">Edit</button>
+                <button type="button" onclick="deleteNews('@i.NewsArticleId','@i.NewsTitle')">Delete</button>
+                <button type="button" style="background:forestgreen" onclick="editNews('@i.NewsArticleId')">Edit</button>
             </td>
 
         </tr>
@@ -85,7 +85,7 @@
                 data: { id: id },
                 success: function (response) {
                     if (response.success) {
-                        location.reload;
+                        location.reload();
                         alert(response.message);
                         
                         // Additional logic on success

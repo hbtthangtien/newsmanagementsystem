@@ -48,7 +48,7 @@
         <div class="form-group"> 
             <label asp-for="Tags">Tags</label>
             <input type="hidden" asp-for="Tags" id="tags"/>
-            <select class="form-select" id="multiple-select-field" data-placeholder="Choose anything" multiple>
+            <select class="form-select" id="multiple-select-field" data-placeholder="Choose tags" multiple>
                 @foreach(var i in tags)
                 {
                     <option value="@i.TagId">@i.TagName</option>

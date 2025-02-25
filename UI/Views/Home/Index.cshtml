@@ -41,7 +41,7 @@
     {
         if(i.NewsStatus == true)
         {
-            <div class="card" onclick="redirectToDetails(@i.NewsArticleId)">
+            <div class="card" onclick="redirectToDetails('@i.NewsArticleId')">
                 <h2 class="text-center">@i.NewsTitle</h2>
                 <p class="text-center">@i.Headline</p>
                 <p><strong>Auhor:</strong> @i.CreatedBy!.AccountName</p>

@@ -17,6 +17,7 @@ namespace Application
             services.AddScoped<INewArticleService,NewArticleService>();
             services.AddScoped<ICategoryServices,CategoryService>();
             services.AddScoped<ITagService,TagService>();
+            services.AddScoped<IAccountService,AccountService>();
         }
     }
 }

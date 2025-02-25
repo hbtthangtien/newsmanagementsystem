@@ -24,7 +24,7 @@ namespace Application.DTOs
         public bool? NewsStatus { get; set; } = false;
 
         public string? CreatedBy { get; set; }
-
+        public string? UpdatedBy { get; set; }
         public string? Tags { get; set; }
     }
 }

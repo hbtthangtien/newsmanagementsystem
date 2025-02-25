@@ -25,6 +25,10 @@
                 }
             </select>
         </div>
+        <div class="form-check form-switch form-group">
+            <input name="IsActive" class="form-check-input" value="true" type="checkbox" id="flexSwitchCheckChecked" @(Model.IsActive == true ? "checked" : "") />
+            <label class="form-check-label" asp-for="IsActive">Active</label>
+        </div>
         <button type="submit">Edit</button>
     </form>
 </div>

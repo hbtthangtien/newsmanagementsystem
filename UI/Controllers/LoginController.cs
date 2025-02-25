@@ -40,7 +40,7 @@ namespace UI.Controllers
                     Role = (Persistences.Enum.UserRole)user.AccountRole!
                 };
                 HttpContext.Session.SetString("user", JsonSerializer.Serialize(u));
-                HttpContext.Session.SetString("UserId",user.AccountId.ToString());
+                HttpContext.Session.SetString("UserId",user.AccountId+"");
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -1,6 +1,7 @@
 ﻿using Application.DTOs;
 using AutoMapper;
 using Persistences.Entities;
+using System.Linq;
 using UI.Areas.Staff.Models;
 using UI.Models;
 
@@ -19,9 +20,11 @@ namespace UI.Helper
             CreateMap<NewsArticleModel, NewsArticle>().ReverseMap()
                     .ForMember(dest => dest.CreatedBy, e => e.MapFrom(src => src.CreatedBy!.AccountName))
                     .ForMember(dest => dest.Category, e => e.MapFrom(src => src.Category!.CategoryName))
+                    .ForMember(dest => dest.Tags, e => e.MapFrom(src => string.Join(";",src.Tags.Select(e => e.TagId))))
                     .ReverseMap();
             CreateMap<TagModel, Tag>().ReverseMap();
             CreateMap<NewsArticleModel,NewsArticleDTO>().ReverseMap();
+            CreateMap<AccountModel, SystemAccount>().ReverseMap();
         }
     }
 }

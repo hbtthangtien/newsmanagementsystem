@@ -46,10 +46,11 @@ namespace UI.Areas.Staff.Controllers
             return View(category);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, CategoryModel category)
+        public async Task<IActionResult> Edit(int id, CategoryModel category, bool IsActive)
         {
             var _category = _mapper.Map<Category>(category);
             _category.CategoryId = (short)id;
+            _category.IsActive = IsActive;
             await _categoryService.UpdateCategory(_category);
             return RedirectToAction("Index", "ManageCategory");
         }
@@ -69,5 +70,7 @@ namespace UI.Areas.Staff.Controllers
             await _categoryService.AddCategoryAsync(category);
             return RedirectToAction("Index", "ManageCategory");
         }
+
+       
     }
 }

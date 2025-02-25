@@ -1,0 +1,73 @@
+﻿@model IEnumerable<UI.Areas.Staff.Models.NewsArticleModel>
+@{
+}
+<h1>Manage News Article</h1>
+<table>
+    <tr>
+        <th>News Title</th>
+        <th>Headline</th>
+        <th>News Content</th>
+        <th>News Source</th>
+        <th>Category</th>
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>Modified Date</th>
+        <th>Status</th>
+
+
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.NewsTitle</td>
+            <td>@i.Headline</td>
+            <td>@i.NewsContent</td>
+            <td>@i.NewsSource</td>
+            <td>@i.Category</td>
+            <td>@i.CreatedBy</td>
+            <td>@i.CreatedDate</td>
+            <td>@i.ModifiedDate</td>
+            <td>@(i.NewsStatus == true ? "Active" : "Inactive")</td>
+            
+
+        </tr>
+    }
+</table>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+</style>

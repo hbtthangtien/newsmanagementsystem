@@ -1,4 +1,15 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc
+@using System.Text.Json
+@using Microsoft.AspNetCore.Http
+@using UI.Models
+@{
+    var userJson = HttpContextAccessor.HttpContext?.Session.GetString("user");
+    UserModel user = new UserModel();
+    if (userJson != null)
+        user = JsonSerializer.Deserialize<UserModel>(userJson)!;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +32,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="staff" asp-controller="home" asp-action="Index">Staff System</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="home" asp-action="Index">News Management System</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                        </li>
+                        @if (userJson == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (user.Role == Persistences.Enum.UserRole.Staff)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="staff" asp-controller="Home" asp-action="Index">Staff system</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark">Hello @user.UserName</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="logout">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
