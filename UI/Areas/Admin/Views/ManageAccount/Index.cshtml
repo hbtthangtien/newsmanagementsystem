@@ -1,0 +1,82 @@
+﻿@model IEnumerable<UI.Areas.Admin.Models.AccountModel>
+@{
+}
+<h1>Manage News Article</h1>
+<table>
+    <tr>
+        <th>Account Id</th>
+        <th>Fullname</th>
+        <th>Account email</th>
+        <th>Password</th>
+        <th>User role</th>
+        <th>Status</th>
+        <th>Action</th>
+
+
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.AccountId</td>
+            <td>@i.AccountName</td>
+            <td>@i.AccountEmail</td>
+            <td>@i.AccountPassword</td>
+            <td>@i.AccountRole</td>
+            <td>@i.AccountStatus</td>
+            
+            <td>
+                <button type="button" style="background:forestgreen" onclick="editAccount(@i.AccountId)">Edit</button>
+            </td>
+
+        </tr>
+    }
+</table>
+</table>
+<div><button type="button" onclick="addAccount()">Add New Account</button></div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+</style>
+<script>
+
+    function editAccount(id) {
+        window.location.href = 'ManageAccount/edit?id=' + id;
+    }
+    function addAccount() {
+        window.location.href = 'ManageAccount/add';
+    }
+</script>

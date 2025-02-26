@@ -25,6 +25,7 @@ namespace UI.Helper
             CreateMap<TagModel, Tag>().ReverseMap();
             CreateMap<NewsArticleModel,NewsArticleDTO>().ReverseMap();
             CreateMap<AccountModel, SystemAccount>().ReverseMap();
+            CreateMap<Areas.Admin.Models.AccountModel,SystemAccount>().ReverseMap();
         }
     }
 }
